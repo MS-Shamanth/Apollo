@@ -1,5 +1,20 @@
 # Team Apollo — team site
 
+Team Apollo is a venture team of five engineers from Mysuru graduating in 2027, combining deep technical depth, hackathon-proven execution, and entrepreneurial drive. Built for the Global FinTech Hackcelerator 2026 (Zurich Insurance), their flagship product Proven is an AI engine that closes the SME insurance protection gap by auditing policy documents and preparing structured case files for licensed advisers.
+
+
+The Team & Roles
+
+1. Preran S Gowda — Technical Lead & Architecture
+
+2. Shamanth M S — AI Engineering & Evaluation
+
+3. Shreya B J — Ingestion & Data Privacy
+
+4. Shashank S — Product & Trust Architecture
+
+5. Chithsukhi C V — Product Design & Research
+
 ## Run it
 
 ```bash
