@@ -1,8 +1,5 @@
 # Team Apollo — team site
 
-A single-page team site for five engineers. Every fact on the page comes from the
-resumes in `../Team_resume`; nothing is invented.
-
 ## Run it
 
 ```bash
