@@ -3,6 +3,7 @@ import { ArrowUp } from "lucide-react";
 import { members, siteConfig } from "../data/team";
 import { GithubMark, LinkedinMark } from "./icons";
 import { Reveal } from "./primitives";
+import verisLogo from "../assets/veris-logo.png";
 
 const NAV = [
   { id: "about", label: "About" },
@@ -29,9 +30,12 @@ export default function Footer() {
 
         <div className="mt-24 grid gap-14 border-t border-line pt-14 md:grid-cols-12">
           <div className="md:col-span-4">
-            <p className="font-mono text-sm tracking-[0.2em] text-bright">
-              {siteConfig.teamName}
-            </p>
+            <div className="flex items-center gap-3">
+              <img src={verisLogo} alt="Veris logo" className="h-8 w-8 object-contain" />
+              <p className="font-mono text-sm tracking-[0.2em] text-bright">
+                {siteConfig.teamName}
+              </p>
+            </div>
             <p className="mt-5 max-w-xs text-pretty leading-relaxed text-mute">
               {siteConfig.intro}
             </p>

@@ -38,7 +38,7 @@ export default function Navbar() {
           ].join(" ")}
         >
           <a href="#top" className="group flex items-center gap-2.5" aria-label="Back to top">
-            <img src={verisLogo} alt="Veris logo" className="h-6 w-6 object-contain" />
+            <img src={verisLogo} alt="Veris logo" className="h-8 w-8 object-contain" />
             <span className="font-mono text-xs font-medium tracking-[0.2em] text-bright">
               {siteConfig.teamName}
             </span>
