@@ -31,7 +31,7 @@ export default function Footer() {
         <div className="mt-24 grid gap-14 border-t border-line pt-14 md:grid-cols-12">
           <div className="md:col-span-4">
             <div className="flex items-center gap-3">
-              <img src={verisLogo} alt="Veris logo" className="h-8 w-8 object-contain" />
+              <img src={verisLogo} alt="Veris logo" className="h-24 w-24 object-contain" />
               <p className="font-mono text-sm tracking-[0.2em] text-bright">
                 {siteConfig.teamName}
               </p>
