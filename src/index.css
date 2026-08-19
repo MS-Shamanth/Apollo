@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Design tokens. Warm near-black ground, off-white type, and a
+ * five-colour palette — one hue per team member, reused as the site's
+ * accent system so the colour always means something.
+ * ------------------------------------------------------------------ */
+@theme {
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-base: #0a0a0c;
+  --color-surface: #101014;
+  --color-raised: #17171d;
+  --color-line: #26262f;
+  --color-line-soft: #1c1c23;
+  --color-mute: #7d7d8c;
+  --color-body: #b8b8c4;
+  --color-bright: #f6f5f2;
+
+  --color-accent: #e9b44c;
+  --color-m1: #e9b44c;
+  --color-m2: #6ba8e5;
+  --color-m3: #c88be0;
+  --color-m4: #56c596;
+  --color-m5: #ee8a6a;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-base);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-bright);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #0a0a0c;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  @media (pointer: fine) {
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2c2c37;
+      border: 3px solid #0a0a0c;
+      border-radius: 99px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3d3d4a;
+    }
+  }
+}
+
+@layer components {
+  /* Small uppercase technical label. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+  }
+
+  /* Headline treatment that runs the five member hues across the text. */
+  .spectrum {
+    background-image: linear-gradient(
+      100deg,
+      var(--color-m1) 2%,
+      var(--color-m2) 27%,
+      var(--color-m3) 50%,
+      var(--color-m4) 73%,
+      var(--color-m5) 98%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Shared pill. Every bordered button and chip on the site uses this,
+   * so hover behaviour is identical everywhere: the outline colour
+   * floods the fill and the label flips to the dark ground.
+   * Set --pill-accent inline to tint it to a member's hue.
+   * ---------------------------------------------------------------- */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    background-color: transparent;
+    color: var(--color-body);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+    transition:
+      background-color 380ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+      border-color 380ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+      color 380ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
+      transform 380ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  .pill:hover,
+  .pill:focus-visible {
+    background-color: var(--pill-accent, var(--color-accent));
+    border-color: var(--pill-accent, var(--color-accent));
+    color: var(--color-base);
+    transform: translateY(-1px);
+  }
+
+  /* Dimmer resting state for dense chip fields. */
+  .pill-quiet {
+    border-color: var(--color-line-soft);
+    color: var(--color-mute);
+  }
+
+  /* Seamless scrolling row. The track holds two copies of its children. */
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll var(--marquee-duration, 60s) linear infinite;
+  }
+
+  .marquee-reverse {
+    animation-direction: reverse;
+  }
+
+  .marquee-host:hover .marquee {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  /* Fine grain so large dark areas don't band. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Marquees stop entirely rather than snapping through a 0.01ms loop. */
+  .marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+}
